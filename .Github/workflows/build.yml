@@ -1,0 +1,19 @@
+name: Build PKG
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ps3dev/psl1ght
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build PKG
+        run: |
+          export PSL1GHT=/psl1ght
+          export PS3DEV=/ps3dev
+          export PATH=$PSL1GHT/ppu/bin:$PS3DEV/bin:$PATH
+          make -j4
+          ls -lh *.pkg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CobraArena2P
+          path: "*.pkg"
