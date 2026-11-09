@@ -1,9 +1,11 @@
 name: Build PKG
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ps3dev/psl1ght
+    container: ps3dev/psl1ght:latest
     steps:
       - uses: actions/checkout@v4
       - name: Build PKG
